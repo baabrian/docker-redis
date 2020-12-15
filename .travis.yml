@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install: 
-  - docker build -t baabrian/docker-redis -f Dockerfile.dev /frontend
+  - docker build -t baabrian/docker-redis -f Dockerfile.dev ./frontend
 
 script: 
   - docker run baabrian/docker-redis npm run test -- --coverage
