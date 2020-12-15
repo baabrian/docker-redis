@@ -1,9 +1,9 @@
 sudo: required
-services:
+services: 
   - docker
 
-before_install:
-  - docker build -t baabrian/docker-redis -f /frontend/Dockerfile.dev .
+before_install: 
+  - docker build -t baabrian/docker-redis -f Dockerfile.dev /frontend
 
-script:
+script: 
   - docker run baabrian/docker-redis npm run test -- --coverage
