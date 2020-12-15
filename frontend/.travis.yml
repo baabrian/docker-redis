@@ -6,4 +6,4 @@ before_install:
   - docker build -t baabrian/docker-redis -f Dockerfile.dev .
 
 script: 
-  - docker run baabrian/docker-redis npm run test -- --coverage
+  - docker run -e CI=true baabrian/docker-redis npm run test
