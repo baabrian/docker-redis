@@ -1,9 +1,22 @@
 sudo: required
-services: 
+services:
   - docker
 
-before_install: 
-  - docker build ./frontend -t baabrian/docker-redis -f Dockerfile.dev 
+before_install:
+  - docker build ./frontend -t baabrian/docker-redis -f Dockerfile.dev
 
-script: 
+script:
   - docker run -e CI=true baabrian/docker-redis npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker-redis"
+  env: "DockerRedis-env"
+  bucket_name: "elasticbeanstalk-us-east-1-178511464929"
+  bucket_path: "docker-redis"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: 
+    secure: "$AWS_SEECRET_KEY"
